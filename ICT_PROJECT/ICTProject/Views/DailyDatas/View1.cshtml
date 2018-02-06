@@ -1,0 +1,234 @@
+﻿
+@{
+    ViewBag.Title = "View1";
+}
+
+<h2>View1</h2>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.css" rel="stylesheet"> 
+<script src="~/Scripts/angular-drag-and-drop-lists.js"></script>
+<script src="~/Scripts/angular-drag-and-drop-lists.min.js"></script>
+<style>
+    /**
+ * For the correct positioning of the placeholder element, the dnd-list and
+ * it's children must have position: relative
+ */
+.typesDemo ul[dnd-list],
+.typesDemo ul[dnd-list] > li {
+  position: relative;
+}
+
+/**
+ * The dnd-list should always have a min-height,
+ * otherwise you can't drop to it once it's empty
+ */
+.typesDemo ul[dnd-list] {
+  min-height: 42px;
+  padding-left: 0px;
+}
+
+/**
+ * The dndDraggingSource class will be applied to
+ * the source element of a drag operation. It makes
+ * sense to hide it to give the user the feeling
+ * that he's actually moving it.
+ */
+.typesDemo ul[dnd-list] .dndDraggingSource {
+  display: none;
+}
+
+/**
+ * An element with .dndPlaceholder class will be
+ * added to the dnd-list while the user is dragging
+ * over it.
+ */
+.typesDemo ul[dnd-list] .dndPlaceholder {
+  display: block;
+  background-color: #ddd;
+  padding: 10px 15px;
+  min-height: 42px;
+}
+
+/**
+ * The dnd-lists's child elements currently MUST have
+ * position: relative. Otherwise we can not determine
+ * whether the mouse pointer is in the upper or lower
+ * half of the element we are dragging over. In other
+ * browsers we can use event.offsetY for this.
+ */
+.typesDemo ul[dnd-list] li {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+  display: block;
+  margin-bottom: -1px;
+
+  /* Disable text selection if item is not draggable */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.typesDemo ul[dnd-list] li dnd-nodrag {
+  display: block;
+  padding: 10px 15px;
+}
+
+/**
+ * Gender-specifc background
+ */
+.typesDemo ul[dnd-list] li.background-man {
+  background-color: #CAE0FC;
+}
+
+.typesDemo ul[dnd-list] li.background-woman {
+  background-color: #FFE2F5;
+}
+
+.typesDemo ul[dnd-list] input.background-man {
+  background-color: #D8E9FF;
+  color: #2F4D99;
+}
+
+.typesDemo ul[dnd-list] input.background-woman {
+  background-color: #FFF0FA;
+  color: #D84FA7;
+}
+
+/**
+ * Handle positioning
+ */
+.typesDemo .handle {
+  cursor: move;
+  position: absolute;
+  top: 14px;
+}
+
+.typesDemo .name {
+  margin-left: 20px;
+}
+</style>
+<body>
+    <table class="table table-bordered pagin-table">
+        <thead>
+            <tr>
+                <th width="50px">No</th>
+                <th>Name</th>
+                <th width="220px">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Hardik Savani</td>
+                <td><a href="" class="btn btn-danger">Delete</a></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Rajesh Savani</td>
+                <td><a href="" class="btn btn-danger">Delete</a></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Haresh Patel</td>
+                <td><a href="" class="btn btn-danger">Delete</a></td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Vimal Patel</td>
+                <td><a href="" class="btn btn-danger">Delete</a></td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Harshad Pathak</td>
+                <td><a href="" class="btn btn-danger">Delete</a></td>
+            </tr>
+            <tr>
+                <td>
+                    
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul dnd-list="list.people"
+        dnd-allowed-types="list.allowedTypes"
+        dnd-disable-if="list.people.length >= list.max">
+
+        <li ng-repeat="person in list.people"
+          
+            dnd-draggable="person"
+            dnd-type="person.type"
+            dnd-disable-if="person.type == 'unknown'"
+            dnd-moved="list.people.splice($index, 1)"
+            class="background-{{person.type}}">
+            <dnd-nodrag>
+                <div dnd-handle class="handle">:::</div>
+                <div class="name">
+                    <input type="text" ng-model="person.name" class="background-{{person.type}} form-control input-sm">
+                </div>
+            </dnd-nodrag>
+        </li>
+
+        <li class="dndPlaceholder">
+            Drop any <strong>{{list.allowedTypes.join(' or ')}}</strong> here
+        </li>
+
+    </ul>
+</body>
+
+
+<script type="text/javascript">
+  $('tbody').sortable();
+</script>
+<script>
+    angular.module("demo").controller("TypesDemoController", function ($scope) {
+
+        $scope.lists = [
+            {
+                label: "Men",
+                allowedTypes: ['man'],
+                max: 4,
+                people: [
+                    { name: "Bob", type: "man" },
+                    { name: "Charlie", type: "man" },
+                    { name: "Dave", type: "man" }
+                ]
+            },
+            {
+                label: "Women",
+                allowedTypes: ['woman'],
+                max: 4,
+                people: [
+                    { name: "Alice", type: "woman" },
+                    { name: "Eve", type: "woman" },
+                    { name: "Peggy", type: "woman" }
+                ]
+            },
+            {
+                label: "People",
+                allowedTypes: ['man', 'woman'],
+                max: 6,
+                people: [
+                    { name: "Frank", type: "man" },
+                    { name: "Mallory", type: "woman" },
+                    { name: "Alex", type: "unknown" },
+                    { name: "Oscar", type: "man" },
+                    { name: "Wendy", type: "woman" }
+                ]
+            }
+        ];
+
+        // Model to JSON for demo purpose
+        $scope.$watch('lists', function (lists) {
+            $scope.modelAsJson = angular.toJson(lists, true);
+        }, true);
+
+    });
+</script>
