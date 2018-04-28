@@ -70,7 +70,7 @@ namespace ICT_Project.Controllers
             
             return View();
         }
-
+        // test
         //
         // POST: /Account/Login
         [HttpPost]
