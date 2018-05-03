@@ -1,0 +1,113 @@
+﻿@model IEnumerable<ICT_Project.Models.DBC.SdcDetails>
+@{
+    ViewBag.Title = "Index";
+    @Html.Partial("RM_Partial")
+}
+
+<h2>Index</h2>
+<dl class="dl-horizontal">
+    <dt> ENTRY DATE</dt>
+    <dd> <input type="date" contenteditable="true" /> </dd>
+</dl>
+<script src="~/Scripts/jquery-ui-1.10.2.js"></script>
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/jquery.dataTables.js"></script>
+
+<p>  <b> CURRENT SELF DEFENCE CONSULTANTS</b></p>
+<div class="form-group">
+    <div class="col-md-2">
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" value="Add New SDC" onclick="location.href='@Url.Action("Create","SdcDetails")'" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+    <div class="col-md-10">
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>
+
+                    </th>
+                    <th> Name </th>
+
+                    <th> TC/SDC </th>
+                    <th> FT/PT </th>
+                    <th> SEQUENCE </th>
+                    <th>UP</th>
+                    <th>DOWN</th>
+                    <th></th>
+
+            </tbody>
+            <tbody id="MoveableRow">
+                @foreach (var item in Model)
+
+                {
+
+                    <tr id="dragrow" draggable="true">
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.SdcDetailsID })
+                        </td>
+                        <td id="name">
+                            @Html.DisplayFor(modelItem => item.Fullname)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IsTeamCoordinator)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IsFullTime)
+                        </td>
+                        <td> @Html.DisplayFor(modelItem => item.SdcSequenceNum)</td>
+                        <td><button class="up_button btn btn-default">UP</button></td>
+                        <td><button class="down_button btn btn-default">Down</button></td>
+                        <td>
+
+                            @Html.ActionLink("Delete", "Delete", new { id = item.SdcDetailsID })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input type="button" value="Save Changes & submit" onclick="location.href='@Url.Action("Create","DailyDatas")'" class="btn btn-default" />
+    </div>
+</div>
+
+<script>
+    $('#MoveableRow').sortable({
+        stop: updateDB(event) // event, ui
+    });
+
+    function updateDB(event) {
+        alert("done");
+    }
+</script>
+<script>
+
+    $('.up_button').on('click', function () {
+       var row = $(this).closest('tr');
+       row.insertBefore(row.prev());
+    })
+
+    $('.down_button').on('click', function () {
+        var row = $(this).closest('tr');
+        row.insertAfter(row.next());
+    })
+
+    $(doument).ready(function () {
+        $("#dragrow").dataTable();
+        
+    });
+
+</script>
+
+
+
+    
+

@@ -1,0 +1,51 @@
+﻿@using System.Data;
+@using System.Linq;
+
+@using ICT_Project.Datas;
+@using ICT_Project.Models;
+@using ICT_Project.Controllers;
+
+
+
+@{ DataContext db = new DataContext();
+
+
+
+    
+    
+    var name = (string)Session["LoginUser"];
+    if (name != null)
+    {
+
+
+        var tempUser = db.User.Where(a => a.UserName.Equals(name)).FirstOrDefault();
+        if (tempUser != null)
+        {
+            var user = db.User.Where(a => a.UserName.Equals(name)).Select(a => a.PositionLevel).FirstOrDefault();
+            var username = db.User.Where(a => a.UserName.Equals(name)).Select(a => a.FirstName).FirstOrDefault();
+            if (user.Equals(1))
+            {
+                @Html.Partial("RM_Partial")
+                <p> @username</p>
+
+
+
+            }
+            else if (user.Equals(2))
+            {
+                @Html.Partial("ZD_Partial")
+                <p> @username</p>
+            }
+            else if (user.Equals(3))
+            {
+                @Html.Partial("UM_Partial")
+                <p> @username</p>
+            }
+        }
+    }
+}
+
+
+
+
+

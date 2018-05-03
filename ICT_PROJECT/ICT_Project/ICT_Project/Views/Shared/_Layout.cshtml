@@ -1,0 +1,76 @@
+﻿@using System.Data;
+@using System.Linq;
+@using System.Threading.Tasks;
+@using System.Web;
+@using System.Web.Mvc;
+@using Microsoft.AspNet.Identity;
+@using Microsoft.AspNet.Identity.Owin;
+@using Microsoft.Owin.Security;
+@using ICT_Project.Models.DBC;
+@using ICT_Project.Datas;
+@using ICT_Project.Models;
+@using System.Web.Security;
+@using ICT_Project.Controllers;
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - HowLand Computer Services</title>
+<!---
+    {
+        DataContext db = new DataContext();
+
+
+        UserIdentity tem = new UserIdentity();
+
+        tem.uName = User.Identity.Name;
+
+
+        if (tem.uName == null)
+        {
+
+        }
+        else if (tem.uName != null)
+        {
+
+
+
+            string tempuser = tem.uName;
+
+
+
+            var user = db.User.Where(a => a.UserName.Equals(tempuser)).Select(a => a.PositionLevel).FirstOrDefault();
+            if (user.Equals(1))
+            {
+                Html.Partial("RM_Partial")
+            }
+            else if (user.Equals(1))
+            {
+                Html.Partial("ZD_Partial")
+                }
+
+        }
+
+        }
+    -->
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <a>n</a>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,34 @@
+﻿
+<div class="container">
+    <div class="navbar navbar-inverse">
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">HOME <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li> @Html.ActionLink("REGIONAL MANAGER", "RMHome", "Home")</li>
+                        <li> @Html.ActionLink("ZONE DIRECTOR", "ZDHome", "Home")</li>
+                        <li> @Html.ActionLink("UPPER MANAGEMENT", "UMHome", "Home")</li>
+
+                    </ul>
+                </li>
+                
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">RESULTS <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        
+                        <li> @Html.ActionLink("TOP TEN WORLD", "TopTenWorld", "Report") </li>
+                        <li> @Html.ActionLink("TOP TEN - OZ/NZ", "TopTenCountry", "Report") </li>
+                        <li> @Html.ActionLink("WEEKLY BEST REGION", "WeeklyBestRegion", "Report") </li>
+                        <li> @Html.ActionLink("TOP GUNS NIGHTLY", "TopGunsNightly", "Report") </li>
+                        <li> @Html.ActionLink("ATTENDANCE TRACKER", "AttendanceTraker", "Report") </li>
+                    </ul>
+                </li>
+                <li>@Html.ActionLink("LOGOFF", "LogOff", "Account")</li>
+            </ul>
+
+        </div>
+
+    </div>
+</div>

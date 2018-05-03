@@ -70,7 +70,7 @@ namespace ICT_Project.Controllers
             
             return View();
         }
-        // test
+
         //
         // POST: /Account/Login
         [HttpPost]
@@ -89,7 +89,7 @@ namespace ICT_Project.Controllers
 
                 if (user != null)
                 {
-
+                    Session["LoginUser"] = username;
                     var userP = db.User.Where(a => a.UserName.Equals(username) && a.Password.Equals(password)).Select(a => a.PositionLevel);
 
                     if (userP.First() == 1)

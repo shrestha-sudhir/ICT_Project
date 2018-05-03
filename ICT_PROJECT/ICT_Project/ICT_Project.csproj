@@ -386,6 +386,8 @@
     <Content Include="Views\Report\WeeklyPerformance.cshtml" />
     <Content Include="Views\Report\WeeklySalesStats.cshtml" />
     <Content Include="Views\Shared\ZD_Partial.cshtml" />
+    <Content Include="Views\Shared\ReportsNav.cshtml" />
+    <Content Include="Views\Shared\UM_Partial.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
